@@ -37,6 +37,8 @@
         <string>location</string>
       </array>
     </config-file>
+    
+    <framework src="CoreLocation.framework" />
     <header-file src="src/ios/BackgroundProcess.h" />
     <source-file src="src/ios/BackgroundProcess.m" />
   </platform>
