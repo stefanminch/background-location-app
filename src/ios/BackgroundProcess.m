@@ -29,7 +29,7 @@
 {
 }
 
-- (void)enable:(CDVInvokedUrlCommand*)command
+-(void)enableLocationInBackground:(CDVInvokedUrlCommand*)command
 {
     //hook into startUpdatingLocation and requestWhenInUseAuthorization
     Method startUpdatingLocationOriginal = class_getInstanceMethod([CLLocationManager class], @selector(startUpdatingLocation));
@@ -40,5 +40,17 @@
     Method requestWhenInUseAuthorizationCustomSwizzle = class_getInstanceMethod([CLLocationManager class], @selector(requestWhenInUseAuthorizationCustomSwizzle));
     method_exchangeImplementations(requestWhenInUseAuthorization, requestWhenInUseAuthorizationCustomSwizzle);
 }
+
+
+- (void)enableDeviceStandby:(CDVInvokedUrlCommand*)command
+{
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+}
+
+- (void)disableDeviceStandby:(CDVInvokedUrlCommand*)command
+{
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
 
 @end
